@@ -1,0 +1,30 @@
+<button onclick="get()">Get Diljith's details</button>
+<table  id="data">
+    <thead></thead>
+    <tbody id="data-tb"></tbody>
+</table>
+
+<script>
+    function get() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://prod-23.centralindia.logic.azure.com:443/workflows/7d8b8586424c40de8358b889c99a6a72/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=3Gbqj12b1VKAM1ej0slFhcSOFAJ0ftWLlRaBQ9-Z46w');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                document.getElementById("data-tb").innerHTML = "<tr><td>Location</td><td>" + data.city + ", " + data.country + "</td></tr>" +
+                    "<tr><td>Department</td><td>" + data.department + "</td></tr>" +
+                    "<tr><td>Display Name</td><td>" + data.displayName + "</td></tr>" +
+                    "<tr><td>Email</td><td>" + data.mail + "</td></tr>" +
+                    "<tr><td>Mobile Phone</td><td>" + data.mobilePhone + "</td></tr>" +
+                    "<tr><td>Office</td><td>" + data.streetAddress + "</td></tr>" +
+                    "<tr><td>Job Title</td><td>" + data.jobTitle + "</td></tr>";
+            } else {
+                console.error(`Error: ${xhr.status}`);
+            }
+        };
+        xhr.onerror = function () {
+            console.error('Request error');
+        };
+        xhr.send();
+    }
+</script>
