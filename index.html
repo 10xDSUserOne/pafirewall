@@ -6,6 +6,8 @@
 
 <script>
     function get() {
+        document.getElementById("data-tb").innerHTML = "";
+        
         const xhr = new XMLHttpRequest();
         xhr.open('GET', 'https://prod-23.centralindia.logic.azure.com:443/workflows/7d8b8586424c40de8358b889c99a6a72/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=3Gbqj12b1VKAM1ej0slFhcSOFAJ0ftWLlRaBQ9-Z46w');
         xhr.onload = function () {
